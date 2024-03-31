@@ -32,8 +32,8 @@ router
     wrapAsync(listingController.updateListing)
 )
 .delete(
-    // isLoggedIn, 
-    // isOwner, 
+    isLoggedIn, 
+    isOwner, 
     wrapAsync(listingController.destroyListing)
 );
 
