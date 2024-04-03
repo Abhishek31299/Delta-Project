@@ -15,6 +15,12 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+
+//add additional hlvukgcyjx
+app.get("/",(req, res) => {
+    res.redirect("listings");
+});
+
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
@@ -102,12 +108,6 @@ app.use("/", userRouter);
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
-});
-
-
-//add additional hlvukgcyjx
-app.get("/",(req, res) => {
-    res.redirect("listings");
 });
 
 
