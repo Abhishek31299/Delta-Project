@@ -16,11 +16,6 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
 
-//add additional hlvukgcyjx
-app.get("/",(req, res) => {
-    res.redirect("listings");
-});
-
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
@@ -101,6 +96,11 @@ app.use((req, res, next) => {
 //     let registeredUser = await user.register(fakeUser, "helloworld"); 
 //     res.send(registeredUser);
 // });
+
+//add additional /
+app.get("/",(req, res) => {
+    res.redirect("listings");
+});
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
