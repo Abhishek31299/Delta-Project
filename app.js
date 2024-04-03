@@ -97,15 +97,16 @@ app.use((req, res, next) => {
 //     res.send(registeredUser);
 // });
 
-//add additional /
-app.get("/",(req, res) => {
-    res.redirect("listings");
-});
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
+
+//add additional /
+app.get("/",(req, res) => {
+    res.redirect("listings");
+});
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 });
