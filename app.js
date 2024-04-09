@@ -4,6 +4,7 @@ if(process.env.NODE_ENV != " production") {
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -20,6 +21,8 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
+const { error } = require('console');   // this line add after testing
+
 const dbUrl = process.env.ATLASDB_URL;
 
 main()
@@ -31,7 +34,7 @@ main()
 });
 
 async function main() {
-    await mongoose.connect(dbUrl);
+    await mongoose.connect(dbUrl);    // now mongoose connects with our Atlas DB
 }
 
 app.set("view engine", "ejs");
@@ -46,7 +49,7 @@ const store = MongoStore.create({
     crypto: {
         secret: process.env.SECRET,
     },
-    touchAfter: 24 * 3600,
+    touchAfter: 24 * 3600,   // time period in second
 });
 
 store.on("error", () => {
@@ -55,7 +58,7 @@ store.on("error", () => {
 
 
 const sessionOptions = {
-    store,
+    store,  //storing our mongostore info inside session and now our session info will get stored in Atlas DB
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
@@ -65,10 +68,6 @@ const sessionOptions = {
         httpOnly: true,
     },
 };
-
-// app.get("/", (req, res) => {
-//     res.send("Hi, I am root");
-// });
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -98,10 +97,10 @@ app.use((req, res, next) => {
 // });
 
 
-//add additional /  (PUSH)
-app.get("/",(req, res) => {
-    res.redirect("/listings");
-});
+// //add additional /  (PUSH)
+// app.get("/",(req, res) => {
+//     res.redirect("/listings");
+// });
 
 
 app.use("/listings", listingRouter);
