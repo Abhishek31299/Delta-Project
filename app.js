@@ -21,8 +21,6 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const { error } = require('console');   // this line add after testing
-
 const dbUrl = process.env.ATLASDB_URL;
 
 main()
@@ -94,12 +92,6 @@ app.use((req, res, next) => {
 
 //     let registeredUser = await user.register(fakeUser, "helloworld"); 
 //     res.send(registeredUser);
-// });
-
-
-// //add additional /  (PUSH)
-// app.get("/",(req, res) => {
-//     res.redirect("/listings");
 // });
 
 
