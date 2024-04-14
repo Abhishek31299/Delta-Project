@@ -1,3 +1,4 @@
+// console.log(mapToken);
 (() => {
     'use strict'
   
